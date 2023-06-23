@@ -5,13 +5,13 @@
 //   SwitchDoc Labs   April 10, 2015
 //
 //
-
-
+#ifndef __SDL_ARDUINO_TCA9545_H__
+#define __SDL_ARDUINO_TCA9545_H__
 
 #if ARDUINO >= 100
- #include "Arduino.h"
+#include "Arduino.h"
 #else
- #include "WProgram.h"
+#include "WProgram.h"
 #endif
 
 #include <Wire.h>
@@ -19,43 +19,40 @@
 /*=========================================================================
     I2C ADDRESS/BITS
     -----------------------------------------------------------------------*/
-    #define TCA9545_ADDRESS                         0x73
+#define TCA9545_ADDRESS 0x73
 
 /*=========================================================================*/
 /*=========================================================================
  I2C BUS ADDRESSES
  -----------------------------------------------------------------------*/
 
-
-    #define TCA9545_CONFIG_BUS0                  0x01  // 1 = enable, 0 = disable
-    #define TCA9545_CONFIG_BUS1                  0x02  // 1 = enable, 0 = disable
-    #define TCA9545_CONFIG_BUS2                  0x04  // 1 = enable, 0 = disable
-    #define TCA9545_CONFIG_BUS3                  0x08  // 1 = enable, 0 = disable
+#define TCA9545_CONFIG_BUS0 0x01 // 1 = enable, 0 = disable
+#define TCA9545_CONFIG_BUS1 0x02 // 1 = enable, 0 = disable
+#define TCA9545_CONFIG_BUS2 0x04 // 1 = enable, 0 = disable
+#define TCA9545_CONFIG_BUS3 0x08 // 1 = enable, 0 = disable
 
 /*=========================================================================
     CONFIG REGISTER (R/W)
     -----------------------------------------------------------------------*/
-    #define TCA9545_REG_CONFIG                      0x00
-    /*---------------------------------------------------------------------*/
-
+#define TCA9545_REG_CONFIG 0x00
+/*---------------------------------------------------------------------*/
 
 /*=========================================================================*/
 
-class SDL_Arduino_TCA9545{
- public:
-  SDL_Arduino_TCA9545(uint8_t addr = TCA9545_ADDRESS);
-  void begin(void);
-  void read_control_register(uint8_t *value);
-  void write_control_register(uint8_t value);
-  void TCA9545SetConfig(void);
+class SDL_Arduino_TCA9545
+{
+public:
+    SDL_Arduino_TCA9545(uint8_t addr = TCA9545_ADDRESS);
+    void begin(void);
+    void read_control_register(uint8_t *value);
+    void write_control_register(uint8_t value);
+    void TCA9545SetConfig(void);
 
- private:
+private:
+    uint8_t TCA9545_i2caddr;
 
-  uint8_t TCA9545_i2caddr;
-    
-  void wireWriteRegister(uint8_t reg, uint8_t value);
-  void wireReadRegister(uint8_t reg, uint8_t *value);
-
-
-
+    void wireWriteRegister(uint8_t reg, uint8_t value);
+    void wireReadRegister(uint8_t reg, uint8_t *value);
 };
+
+#endif // __SDL_ARDUINO_TCA9545_H__
